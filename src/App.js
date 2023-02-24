@@ -1,10 +1,9 @@
-import React from 'react';
-import foods from './foods.json';
-import { Row } from 'antd';
-import FoodBox from './components/FoodBox';
+import React, { useState } from 'react';
+import { Button, Divider, Row } from 'antd';
 import AddFoodForm from './components/AddFoodForm';
-import { useState } from 'react';
 import SearchBar from './components/SearchBar';
+import FoodBox from './components/FoodBox';
+import foods from './foods.json';
 
 function App() {
   const [foodList, setFoodList] = useState(foods);
@@ -37,27 +36,35 @@ function App() {
 
   return (
     <div className="App">
-      {showForm && <AddFoodForm onAddFood={handleAddFood} />} <br />
-      <SearchBar onSearch={handleSearch} />
-      <br />
-      <br />
-      <button onClick={handleToggleForm}>
+      {showForm ? <AddFoodForm onAddFood={handleAddFood} /> : null}
+      <br/>
+
+
+      <Button onClick={handleToggleForm}>
         {showForm ? 'Hide Form' : 'Show Form'}
-      </button>
-      <br />
-      {foodList.length === 0 ? (
-        <p>No food items to display</p>
-      ) : (
-        <Row>
-          {foodList.map((food) => (
+        <br/>
+      </Button>
+      <br/>
+
+      <SearchBar onSearch={handleSearch} />
+      <br/>
+      <br/>
+
+      <Divider>Food List</Divider>
+
+      <Row style={{ width: '100%', justifyContent: 'center' }}>
+        {foodList.length === 0 ? (
+          <p>No food items to display</p>
+        ) : (
+          foodList.map((food) => (
             <FoodBox
               key={food.name}
               food={food}
               onDeleteFood={handleDeleteFood}
             />
-          ))}
-        </Row>
-      )}
+          ))
+        )}
+      </Row>
     </div>
   );
 }

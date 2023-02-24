@@ -40,6 +40,7 @@ function AddFoodForm(props) {
         onChange={handleChange}
       />
 
+
       <label>Image</label>
       <Input
         name="image"
@@ -48,7 +49,9 @@ function AddFoodForm(props) {
         onChange={handleChange}
       />
 
+
       <label>Calories</label>
+      <br/>
       <Input
         name="calories"
         value={newFood.calories}
@@ -63,7 +66,8 @@ function AddFoodForm(props) {
         type="number"
         onChange={handleChange}
       />
-
+            <br/>
+            <br/>
       <button type="submit" onClick={handleSubmit}>
         Create
       </button>
